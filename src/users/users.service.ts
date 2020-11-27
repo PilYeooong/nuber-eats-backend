@@ -121,7 +121,7 @@ export class UserService {
       return { ok: false, error: 'Not a valid verification code' };
     } catch (error) {
       console.error(error);
-      return { ok: false, error };
+      return { ok: false, error: 'Could not verify Email' };
     }
   }
 }
