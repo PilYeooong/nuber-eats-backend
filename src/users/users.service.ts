@@ -46,7 +46,6 @@ export class UserService {
       this.mailService.sendVerificationEmail(user.email, verification.code);
       return { ok: true };
     } catch (error) {
-      console.error(error);
       return { ok: false, error: 'cannot create account' };
     }
   }
@@ -67,7 +66,6 @@ export class UserService {
       const token = this.jwtService.sign(user.id);
       return { ok: true, token };
     } catch (error) {
-      console.error(error);
       return { ok: false, error };
     }
   }
@@ -75,11 +73,12 @@ export class UserService {
   async findById(id: number): Promise<UserProfileOutput> {
     try {
       const user = await this.users.findOne({ id });
-      if (user) {
-        return { ok: true, user }
+      // const user = await this.users.findOneOrFail({ id }); 찾지 못한다면 Error 발생시킴
+      if (!user) {
+        return { ok: false, error: 'User Not Found' }
       }
+      return { ok: true, user }
     } catch (error) {
-      console.error(error);
       return { ok: false, error: 'User Not Found' }
     }
   }
