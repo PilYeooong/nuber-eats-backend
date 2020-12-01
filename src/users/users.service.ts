@@ -46,6 +46,7 @@ export class UserService {
       this.mailService.sendVerificationEmail(user.email, verification.code);
       return { ok: true };
     } catch (error) {
+      console.error(error);
       return { ok: false, error: 'cannot create account' };
     }
   }
@@ -92,6 +93,7 @@ export class UserService {
       if (email) {
         user.email = email;
         user.verified = false;
+        await this.verification.delete({ user: { id: user.id }});
         const verification = await this.verification.save(this.verification.create({ user }));
         this.mailService.sendVerificationEmail(user.email, verification.code);
       }
