@@ -26,6 +26,7 @@
     "@nestjs/core": "^7.0.0",
     "@nestjs/graphql": "^7.8.2",
     "@nestjs/platform-express": "^7.0.0",
+    "@nestjs/schedule": "^0.4.1",
     "@nestjs/typeorm": "^7.1.5",
     "apollo-server-express": "^2.19.0",
     "bcrypt": "^5.0.0",
@@ -35,6 +36,7 @@
     "form-data": "^3.0.0",
     "got": "^11.8.0",
     "graphql": "^15.4.0",
+    "graphql-subscriptions": "^1.1.0",
     "graphql-tools": "^7.0.1",
     "joi": "^17.3.0",
     "jsonwebtoken": "^8.5.1",
@@ -71,7 +73,7 @@
   },
   "jest": {
     "moduleNameMapper": {
-        "^src/(.*)$": "<rootDir>/$1"
+      "^src/(.*)$": "<rootDir>/$1"
     },
     "moduleFileExtensions": [
       "js",
@@ -86,9 +88,9 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
-        "node_modules",
-        ".entity.ts",
-        ".constants.ts"
+      "node_modules",
+      ".entity.ts",
+      ".constants.ts"
     ]
   }
 }

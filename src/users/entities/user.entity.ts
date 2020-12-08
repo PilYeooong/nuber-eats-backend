@@ -6,6 +6,8 @@ import * as bcrypt from 'bcrypt';
 import { InternalServerErrorException } from "@nestjs/common";
 import { IsBoolean, IsEmail, IsEnum, IsString } from "class-validator";
 import { Restaurant } from "src/restaurants/entities/restaurant.entity";
+import { Order } from "src/orders/entities/order.entity";
+import { Payment } from "src/payments/entities/payment.entity";
 
 export enum UserRole {
   Client = "Client", // type으로 활용시, type xxx = keyof typeof UserRole;
@@ -42,6 +44,18 @@ export class User extends CoreEntity {
   @Field(() => [Restaurant])
   @OneToMany(() => Restaurant, restaurant => restaurant.owner)
   restaurants: Restaurant[];
+
+  @Field(() => [Order])
+  @OneToMany(() => Order, order => order.customer)
+  orders: Order[];
+
+  @Field(() => [Order])
+  @OneToMany(() => Order, order => order.driver)
+  rides: Order[];
+
+  @Field(() => [Payment])
+  @OneToMany(() => Payment, payment => payment.user, { eager: true })
+  payments: Payment[];
 
   @BeforeInsert()
   @BeforeUpdate()
